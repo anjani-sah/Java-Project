@@ -1,121 +1,141 @@
-# Java Project Collection
+# Employee Registration Web Application
 
-This repository contains a collection of Java projects created to practice Java programming, Object-Oriented Programming, exception handling, database connectivity, web development, and core Java concepts.
+A Java-based Employee Registration Web Application developed using JSP, Servlets, JDBC, and MySQL. The application allows users to register employee details, store them in a MySQL database, view registered employees, and delete employee records.
 
-## Projects in This Repository
+## Features
 
-### 1. Banking System
-
-A menu-driven console-based banking application that manages customer accounts and basic banking operations.
-
-Features:
-- Create customer accounts
-- Customer ID validation from 1 to 20
-- Minimum balance validation
-- Deposit money
-- Withdraw money
-- Insufficient balance handling
-- Custom exception handling
-- File-based customer data storage using `customers.txt`
-
-Java concepts:
-- Classes and objects
-- Constructors
-- Encapsulation
-- Exception handling
-- Custom exceptions
-- File handling
-- Conditional statements and loops
-
-Folder: `BankingSystem/`
-
----
-
-### 2. Employee Salary Calculation
-
-A Java program that calculates salary hikes for different types of employees using inheritance and method overriding.
-
-Employee types:
-- Full Time Employee: 50% salary hike
-- Intern Employee: 25% salary hike
-
-Java concepts:
-- Inheritance
-- Constructor usage
-- Method overriding
-- Protected members
-- Classes and objects
-
-Folder: `Employee/`
-
----
-
-### 3. Employee Registration Web Application
-
-A Java-based web application for registering, viewing, and deleting employee records using JSP, Servlets, JDBC, and MySQL.
-
-Features:
 - Employee registration form
-- Employee data validation
+- Employee name, email, phone, department, and salary fields
+- Input validation
 - Duplicate email checking
 - Store employee records in MySQL
 - Display all registered employees
 - Delete employee records
 - Success and error pages
+- Database connection using JDBC
+- MVC-style project structure
 
-Technologies:
+## Technologies Used
+
 - Java
 - JSP
 - Servlets
 - JDBC
 - MySQL
+- HTML and CSS
 - Apache Tomcat
-- HTML/CSS
+- Eclipse or Spring Tool Suite
+- MySQL Connector/J
 
-Architecture:
-- Model: Employee JavaBean
-- DAO: Database operations
-- Servlet: Request processing
-- JSP: User interface
-- JDBC: Database connectivity
+## Project Architecture
 
-Folder: `EmployeeRegistration/`
+The project follows a simple MVC-style structure.
 
-#### Employee Registration Setup
+### Model
 
-Prerequisites:
-- JDK 1.8 or later
+`Employee.java` is the JavaBean or POJO representing an employee record. It contains fields for ID, name, email, phone, department, salary, and creation time.
+
+### DAO
+
+`EmployeeDAO.java` handles database operations such as inserting, retrieving, and deleting employee records.
+
+### Servlets
+
+- `EmployeeServlet.java` processes employee registration requests.
+- `ListEmployeeServlet.java` retrieves and displays employee records.
+- `DeleteEmployeeServlet.java` handles employee deletion.
+
+### JSP
+
+JSP pages provide the web interface for registration, success messages, employee lists, and related responses.
+
+## Database
+
+The application uses a MySQL database named `employee_db`.
+
+The `employee` table contains:
+
+| Column | Type | Description |
+|---|---|---|
+| id | INT | Auto-increment primary key |
+| name | VARCHAR(100) | Employee name |
+| email | VARCHAR(150) | Unique employee email |
+| phone | VARCHAR(15) | Employee phone number |
+| department | VARCHAR(60) | Employee department |
+| salary | DOUBLE | Employee salary |
+| created_at | TIMESTAMP | Record creation time |
+
+The database setup is available in `schema.sql`.
+
+## Prerequisites
+
+- JDK 8 or later
 - Apache Tomcat 8.5
 - MySQL 8.x
 - Eclipse or Spring Tool Suite
-- MySQL Connector Java JAR
+- MySQL Connector/J
 
-Setup steps:
+## Setup Instructions
 
-1. Open MySQL Workbench or MySQL CLI.
-2. Run `EmployeeRegistration/schema.sql`.
-3. Open `src/com/employee/util/DBConnection.java`.
-4. Configure the MySQL username and password.
-5. Import the project into Eclipse or STS.
-6. Add the MySQL Connector JAR to the Java Build Path.
-7. Add the same JAR to `WebContent/WEB-INF/lib/`.
-8. Configure Apache Tomcat 8.5.
-9. Run the project on the Tomcat server.
-10. Open:
+### 1. Set up the database
 
-`http://localhost:8080/EmployeeRegistration/`
+Open MySQL Workbench or MySQL CLI and run:
 
-Main URLs:
-- `/` → Registration form
-- `/registerEmployee` → Employee registration
-- `/listEmployees` → Employee list
-- `/deleteEmployee?id=N` → Delete an employee
+```sql
+source schema.sql;
+```
 
-Project structure:
+Or execute the complete `schema.sql` file directly in MySQL.
+
+This creates the `employee_db` database and the `employee` table. Sample employee records are also included for testing.
+
+### 2. Configure database connection
+
+Open:
+
+```text
+src/com/employee/util/DBConnection.java
+```
+
+Update the MySQL username and password according to your local MySQL configuration.
+
+### 3. Import the project
+
+Import the `EmployeeRegistration` folder into Eclipse or Spring Tool Suite as a Dynamic Web Project.
+
+### 4. Add MySQL Connector/J
+
+Add the MySQL Connector/J JAR to the Java Build Path and place the required JAR inside:
+
+```text
+WebContent/WEB-INF/lib/
+```
+
+### 5. Configure Apache Tomcat
+
+Add Apache Tomcat 8.5 as the server runtime and deploy the project.
+
+### 6. Run the application
+
+Start the Tomcat server and open:
+
+```text
+http://localhost:8080/EmployeeRegistration/
+```
+
+## Main Application URLs
+
+- `/` → Employee registration form
+- `/registerEmployee` → Process employee registration
+- `/listEmployees` → Display all employees
+- `/deleteEmployee?id=N` → Delete an employee by ID
+
+## Project Structure
 
 ```text
 EmployeeRegistration/
 ├── schema.sql
+├── README.txt
 ├── src/
 │   └── com/employee/
 │       ├── model/
@@ -137,132 +157,45 @@ EmployeeRegistration/
         └── lib/
 ```
 
----
-
-### 4. Method Overloading and Method Overriding
-
-A Java program demonstrating compile-time polymorphism through method and constructor overloading, and runtime polymorphism through method overriding.
-
-Overloading examples:
-- Shape constructors for different shapes
-- `area()` methods with different parameters
-
-Overriding examples:
-- `Hillstations` parent class
-- `Manali` child class
-- `Mussoorie` child class
-- `Gulmarg` child class
-
-Java concepts:
-- Method overloading
-- Constructor overloading
-- Method overriding
-- Inheritance
-- Polymorphism
-- Runtime method dispatch
-
-Folder: `Overloading and Overriding/`
-
----
-
-### 5. Student Marks and Percentage Calculator
-
-A Java program that stores student information and calculates total marks and percentage.
-
-Features:
-- Store student roll number
-- Store student name
-- Store marks for multiple subjects
-- Calculate total marks
-- Calculate percentage
-- Display student details
-
-Example marks used in the program:
-- 78
-- 85
-- 69
-- 90
-- 88
-
-Java concepts:
-- Classes and objects
-- Arrays
-- Encapsulation
-- Methods
-- Access modifiers
-- Basic arithmetic operations
-
-Folder: `Student/`
-
----
-
-## Repository Structure
+## Application Flow
 
 ```text
-Java-Project/
-│
-├── BankingSystem/
-│   ├── BankingSystem.java
-│   └── README.md
-│
-├── Employee/
-│   ├── Employee.java
-│   └── README.md
-│
-├── EmployeeRegistration/
-│   ├── README.txt
-│   ├── schema.sql
-│   ├── src/
-│   └── WebContent/
-│
-├── Overloading and Overriding/
-│   └── Java source files
-│
-├── Student/
-│   └── Student.java
-│
-└── README.md
+User
+  ↓
+JSP Registration Form
+  ↓
+EmployeeServlet
+  ↓
+Employee JavaBean
+  ↓
+EmployeeDAO
+  ↓
+JDBC
+  ↓
+MySQL Database
+  ↓
+List / Success / Error JSP
 ```
 
-## Technologies and Concepts Covered
+## Java Concepts Demonstrated
 
-- Java
 - Object-Oriented Programming
-- Classes and Objects
+- Classes and objects
+- JavaBeans
 - Encapsulation
-- Inheritance
-- Polymorphism
-- Method Overloading
-- Method Overriding
 - Constructors
-- Exception Handling
-- Custom Exceptions
-- File Handling
-- Arrays
-- JDBC
-- MySQL
-- JSP
+- Getters and setters
 - Servlets
-- Apache Tomcat
-- DAO Pattern
-- MVC-based web application structure
+- JSP
+- JDBC database connectivity
+- DAO pattern
+- MVC-style architecture
+- Exception handling
+- SQL database operations
 
-## Requirements
+## Learning Objective
 
-For the core Java projects:
-- JDK 8 or later
-- Any Java IDE such as Eclipse, IntelliJ IDEA, or VS Code
-
-For Employee Registration:
-- JDK 8 or later
-- Apache Tomcat 8.5
-- MySQL 8.x
-- Eclipse or Spring Tool Suite
-- MySQL Connector Java
-
-## Learning Objectives
-
-These projects demonstrate practical implementation of Java fundamentals and Object-Oriented Programming concepts. The collection also introduces database-driven web application development using JSP, Servlets, JDBC, and MySQL.
+This project demonstrates how Java can be used to build a database-driven web application. It provides practical experience with JSP, Servlets, JDBC, MySQL, JavaBeans, DAO-based database operations, and basic web application architecture.
 
 ## Author
 
